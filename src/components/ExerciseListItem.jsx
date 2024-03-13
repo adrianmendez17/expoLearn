@@ -14,7 +14,7 @@ export default function ExerciseListItem({ item }) {
 
 const styles = StyleSheet.create({
     exerciseContainer: {
-        backgroundColor: '#0e0e0e',
+        backgroundColor: 'white',
         padding: 10,
         borderRadius: 10,
         gap: 5,
@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     exerciseName: {
         fontSize: 30,
         fontWeight: '500',
-        color: 'dimgray'
+        color: 'black'
     },
     exerciseStats: {
         fontSize: 15,
-        color: 'darkgray'
+        color: 'dimgray'
     },
     subValue: {
         textTransform: 'capitalize'

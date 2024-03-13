@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "workouts",
-    "slug": "workouts",
+    "name": "378mobileproject",
+    "slug": "378mobileproject",
     "scheme": "workouts",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,7 +25,8 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
       "expo-router"
