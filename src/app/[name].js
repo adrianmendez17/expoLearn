@@ -1,10 +1,13 @@
-import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import {useLocalSearchParams} from "expo-router";
 import exercises from '../../assets/data/exercises.json'
 import { Stack } from "expo-router";
+import { useState } from "react";
 
 export default function ExerciseDetailsScreen() {
     const params = useLocalSearchParams();
+
+    const [isInstructionExpanded, setIsInstructionExpanded] = useState(false);
 
     const exercise = exercises.find(item => item.name == params.name);
 
@@ -15,7 +18,7 @@ export default function ExerciseDetailsScreen() {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Stack.Screen options={{ title: exercise.name }} />
-            <View style={styles.exerciseHeader}>
+            <View style={styles.exercisePanel}>
                 <Text style={styles.exerciseName}>{exercise.name}</Text>
                 <Text style={styles.exerciseStats}>
                     <Text style={styles.subValue}>{exercise.equipment}</Text> |{' '}
@@ -23,9 +26,17 @@ export default function ExerciseDetailsScreen() {
                 </Text>
             </View>
 
-            <Text style={styles.exerciseInstructions}>
-                {exercise.instructions}
-            </Text>
+            <View style={styles.exercisePanel}>
+                <Text style={styles.exerciseInstructions} numberOfLines={isInstructionExpanded ? 0 : 3}>
+                    {exercise.instructions}
+                </Text>
+                <Text
+                    onPress={() => setIsInstructionExpanded(!isInstructionExpanded)}
+                    style={styles.seeMore}
+                >{isInstructionExpanded ? "See less" : "See more"}</Text>
+            </View>
+
+
         </ScrollView>
     );
 }
@@ -35,11 +46,10 @@ const styles = StyleSheet.create({
         padding: 10,
         gap: 10,
     },
-    exerciseHeader: {
+    exercisePanel: {
         backgroundColor: 'white',
         padding: 10,
         borderRadius: 5,
-
     },
     exerciseName: {
         fontSize: 30,
@@ -56,6 +66,11 @@ const styles = StyleSheet.create({
     exerciseInstructions: {
         fontSize: 16,
         lineHeight: 20,
-
-    }
+    },
+    seeMore: {
+        alignSelf: 'center',
+        padding: 5,
+        fontWeight: 600,
+        color: 'gray',
+    },
 });
